@@ -1,12 +1,12 @@
 {
-  "name": "mneme",
+  "name": "memory",
   "version": "1.0.0",
   "description": "A tiny, dependency-free memory layer for LLM agents — self-editing core blocks + an append-only archive, with pluggable smart recall.",
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
-    "test": "node lib/mneme.cjs health >/dev/null && node examples/demo.cjs >/dev/null && echo ok",
-    "check": "node --check lib/mneme.cjs && node --check examples/demo.cjs && node --check examples/reranker-echo.cjs && echo ok"
+    "test": "node lib/memory.cjs health >/dev/null && node examples/demo.cjs >/dev/null && echo ok",
+    "check": "node --check lib/memory.cjs && node --check examples/demo.cjs && node --check examples/reranker-echo.cjs && echo ok"
   },
   "keywords": [
     "agent-memory",

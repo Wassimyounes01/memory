@@ -1,6 +1,6 @@
-# Contributing to MNEME
+# Contributing to Memory
 
-Thanks for your interest! MNEME is MIT-licensed and built to be forked, extended, and
+Thanks for your interest! Memory is MIT-licensed and built to be forked, extended, and
 dropped into your own stack.
 
 ## Ground rules

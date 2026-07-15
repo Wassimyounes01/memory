@@ -1,6 +1,6 @@
-# MNEME — Architecture
+# Memory — Architecture
 
-Give your agent a memory that survives every session without a vector database, an embedder, or a server. MNEME keeps two things on disk: self-editing core blocks that are always in context (persona, the human, working notes), and an append-only archival log you can recall from. Recall runs a fast keyword/recency prefilter and — if you plug one in — hands the candidates to any LLM to rerank and answer. No reranker? It degrades to keyword recall and never throws. Node and Python twins share the exact same files.
+Give your agent a memory that survives every session without a vector database, an embedder, or a server. Memory keeps two things on disk: self-editing core blocks that are always in context (persona, the human, working notes), and an append-only archival log you can recall from. Recall runs a fast keyword/recency prefilter and — if you plug one in — hands the candidates to any LLM to rerank and answer. No reranker? It degrades to keyword recall and never throws. Node and Python twins share the exact same files.
 
 ## Flow
 
@@ -10,7 +10,7 @@ flowchart LR
     A -->|remember| AR[("archival.jsonl\nappend-only")]
     A -->|recall query| KW["keyword + recency\nprefilter"]
     AR --> KW
-    KW -->|candidates| RR{"MNEME_RERANKER?"}
+    KW -->|candidates| RR{"MEMORY_RERANKER?"}
     RR -->|set| LLM["your LLM\nrerank + answer"]
     RR -->|unset| KO["keyword hits"]
     LLM --> OUT["answer + hits"]
@@ -22,7 +22,7 @@ flowchart LR
 
 ## How it fits together
 
-MNEME is two twin files over a shared on-disk store. `lib/mneme.cjs` (Node) and `python/mneme.py` (stdlib-only Python) both read and write `./data/core-memory.json` (self-editing always-in-context blocks) and `./data/archival.jsonl` (append-only long-term log). Core memory is a tiny key→text map rendered into your system prompt via `memoryPrompt()`; `coreSet`/`coreAppend` persist atomically (write-tmp-then-rename, safe on synced drives). Archival `remember(text, meta)` appends one JSON line. `recall(query, {k})` tokenizes the query (stop-worded), scores every archival row by keyword overlap plus a small recency bonus, and takes the top candidates — that alone is useful. If `MNEME_RERANKER` points at a module exporting `async rerank(query, candidates, k) → {answer, order}`, recall hands it the candidates and returns its answer plus the reranked hits; if the reranker is unset, missing, or throws, recall returns the keyword hits and marks `via:'keyword'`. Every filesystem path is guarded and fail-open, so recall never throws — safe to call inline in a hot agent loop.
+Memory is two twin files over a shared on-disk store. `lib/memory.cjs` (Node) and `python/memory.py` (stdlib-only Python) both read and write `./data/core-memory.json` (self-editing always-in-context blocks) and `./data/archival.jsonl` (append-only long-term log). Core memory is a tiny key→text map rendered into your system prompt via `memoryPrompt()`; `coreSet`/`coreAppend` persist atomically (write-tmp-then-rename, safe on synced drives). Archival `remember(text, meta)` appends one JSON line. `recall(query, {k})` tokenizes the query (stop-worded), scores every archival row by keyword overlap plus a small recency bonus, and takes the top candidates — that alone is useful. If `MEMORY_RERANKER` points at a module exporting `async rerank(query, candidates, k) → {answer, order}`, recall hands it the candidates and returns its answer plus the reranked hits; if the reranker is unset, missing, or throws, recall returns the keyword hits and marks `via:'keyword'`. Every filesystem path is guarded and fail-open, so recall never throws — safe to call inline in a hot agent loop.
 
 ## Extending it
 

@@ -1,14 +1,14 @@
 """
-mneme.py — a tiny, dependency-free memory layer for LLM agents (stdlib-only Python twin).
+memory.py — a tiny, dependency-free memory layer for LLM agents (stdlib-only Python twin).
 
 Two things live on disk, no vector DB / embedder / server required:
   - STORAGE: plain files — robust, offline, $0.
        core memory  -> data/core-memory.json  (self-editing always-in-context blocks)
        archival     -> data/archival.jsonl     (append-only long-term log)
   - RECALL: a cheap, dependency-free keyword/recency search. For LLM-reranked recall, use the
-       Node twin (lib/mneme.cjs) with MNEME_RERANKER set — both read/write the SAME data files.
+       Node twin (lib/memory.cjs) with MEMORY_RERANKER set — both read/write the SAME data files.
 
-No third-party imports. No network. Shares data/ byte-for-byte with lib/mneme.cjs.
+No third-party imports. No network. Shares data/ byte-for-byte with lib/memory.cjs.
 
 CLI:  health | core-get [name] | core-set <name> <val> | core-append <name> <val>
       prompt | remember <text> | recall <query> [k]
@@ -17,7 +17,7 @@ import os, sys, json, time, re
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.dirname(_HERE)
-_DATA_DIR = os.environ.get("MNEME_DATA_DIR") or os.path.join(_ROOT, "data")
+_DATA_DIR = os.environ.get("MEMORY_DATA_DIR") or os.path.join(_ROOT, "data")
 _CORE_PATH = os.path.join(_DATA_DIR, "core-memory.json")
 _ARCHIVAL_PATH = os.path.join(_DATA_DIR, "archival.jsonl")
 # Neutral placeholders — overwrite them for your agent with core_set().
@@ -37,7 +37,7 @@ def _tok(s):
     return [w for w in re.findall(r"[a-z0-9]+", str(s).lower()) if w not in _STOP and len(w) > 2]
 
 
-class Mneme:
+class Memory:
     def __init__(self):
         os.makedirs(_DATA_DIR, exist_ok=True)
         self.blocks = dict(_DEFAULT_BLOCKS)
@@ -122,7 +122,7 @@ class Mneme:
 
 
 def _main(argv):
-    m = Mneme()
+    m = Memory()
     if not argv or argv[0] == "health":
         print(json.dumps(m.health(), indent=2)); return
     cmd = argv[0]

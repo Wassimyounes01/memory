@@ -1,14 +1,14 @@
 'use strict';
 /*
- * reranker-echo.cjs — a zero-dependency example MNEME_RERANKER.
+ * reranker-echo.cjs — a zero-dependency example MEMORY_RERANKER.
  *
- * The contract MNEME expects:
+ * The contract Memory expects:
  *   module.exports = async function rerank(query, candidates, k)
  *   candidates: [{ ts, text, meta? }, ...]  (the keyword/recency prefilter's picks)
  *   returns:    { answer?: string, order?: number[] }   // order = 1-based indices, best first
  *
  * This example uses no LLM — it re-scores candidates by keyword overlap so you can see the
- * seam work with `MNEME_RERANKER=./examples/reranker-echo.cjs`. To make recall genuinely
+ * seam work with `MEMORY_RERANKER=./examples/reranker-echo.cjs`. To make recall genuinely
  * smart, replace the body with a call to any model, e.g.:
  *
  *   const numbered = candidates.map((c, i) => `[${i + 1}] (${c.ts}) ${c.text}`).join('\n');

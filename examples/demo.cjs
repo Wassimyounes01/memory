@@ -1,7 +1,7 @@
 'use strict';
 // demo.cjs — write a few memories, edit a core block, watch recall rank them.
-// Run: node examples/demo.cjs      (add a reranker: MNEME_RERANKER=./examples/reranker-echo.cjs node examples/demo.cjs)
-const M = require('../lib/mneme.cjs');
+// Run: node examples/demo.cjs      (add a reranker: MEMORY_RERANKER=./examples/reranker-echo.cjs node examples/demo.cjs)
+const M = require('../lib/memory.cjs');
 
 M.coreSet('human', 'Ada — founder, ships fast, no fluff');
 M.coreAppend('context', 'Working on the v2 launch this week.');

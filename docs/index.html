@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MNEME — A tiny, dependency-free memory layer for LLM agents — self-editing core blocks + an append-only archive, with pluggable smart recall.</title>
+<title>Memory — A tiny, dependency-free memory layer for LLM agents — self-editing core blocks + an append-only archive, with pluggable smart recall.</title>
 <style>
   :root{
     --ink:#0A0D12; --panel:#11151d; --panel-2:#151b25; --line:#1e2733;
@@ -65,7 +65,7 @@
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <div class="mark"><span class="dot"></span>MNEME</div>
+  <div class="mark"><span class="dot"></span>Memory</div>
   <button id="themeToggle" aria-label="Toggle color theme">◐ theme</button>
 </div></header>
 
@@ -73,7 +73,7 @@
   <div class="eyebrow">SELF-EDITING AGENT MEMORY</div>
   <h1>Memory that<br><span class="under">survives the session.</span></h1>
   <p class="lede">A tiny, dependency-free memory layer for LLM agents — self-editing core blocks + an append-only archive, with pluggable smart recall.</p>
-  <p class="sub">Give your agent a memory that survives every session without a vector database, an embedder, or a server. MNEME keeps two things on disk: self-editing core blocks that are always in context (persona, the human, working notes), and an append-only archival log you can recall from. Recall runs a fast keyword/recency prefilter and — if you plug one in — hands the candidates to any LLM to rerank and answer. No reranker? It degrades to keyword recall and never throws. Node and Python twins share the exact same files.</p>
+  <p class="sub">Give your agent a memory that survives every session without a vector database, an embedder, or a server. Memory keeps two things on disk: self-editing core blocks that are always in context (persona, the human, working notes), and an append-only archival log you can recall from. Recall runs a fast keyword/recency prefilter and — if you plug one in — hands the candidates to any LLM to rerank and answer. No reranker? It degrades to keyword recall and never throws. Node and Python twins share the exact same files.</p>
   <div class="cta">
     <a class="btn primary" href="#start">▸ Quickstart</a>
     <a class="btn" href="#">View on GitHub</a>
@@ -90,30 +90,30 @@
   <div class="shead"><div class="eyebrow">what it does</div><h2>A memory layer in two files.</h2></div>
   <div class="cards"><div class="card"><div class="n">01 / CORE</div><h3>Memory that edits itself</h3><p>coreSet / coreAppend maintain a small set of always-in-context blocks — persona, the human you serve, rolling working notes. memoryPrompt() renders them straight into your system prompt. Atomic writes; safe on synced drives.</p></div>
     <div class="card"><div class="n">02 / ARCHIVE</div><h3>Never lose a fact</h3><p>remember(text, meta) appends to a plain JSONL log — no vector DB, no embedder, no server. It's grep-able, diff-able, and trivially backed up. The store is the source of truth, shared byte-for-byte by the Node and Python twins.</p></div>
-    <div class="card"><div class="n">03 / RECALL</div><h3>Fast now, smart when you want</h3><p>recall(query) runs a keyword/recency prefilter that's useful on its own. Set MNEME_RERANKER to any LLM adapter and it reranks the candidates and answers the query. No reranker configured? It returns the keyword hits and never throws.</p></div></div>
+    <div class="card"><div class="n">03 / RECALL</div><h3>Fast now, smart when you want</h3><p>recall(query) runs a keyword/recency prefilter that's useful on its own. Set MEMORY_RERANKER to any LLM adapter and it reranks the candidates and answers the query. No reranker configured? It returns the keyword hits and never throws.</p></div></div>
 </div></section>
 
 <section id="start"><div class="wrap">
   <div class="shead"><div class="eyebrow">quickstart</div><h2>Up and running in a clone.</h2>
   <p>Every value comes from <code>.env</code>. Nothing here is tied to any account — bring your own.</p></div>
   <pre class="code"><span class="c"># 1. no install needed — pure Node builtins (Python twin is stdlib-only)</span>
-node lib/mneme.cjs health
+node lib/memory.cjs health
 
 <span class="c"># 2. write some memory, then recall it</span>
-node lib/mneme.cjs remember "the launch shipped on the 14th, all green"
-node lib/mneme.cjs remember "the retro is next Tuesday"
-node lib/mneme.cjs recall "when did we launch"
+node lib/memory.cjs remember "the launch shipped on the 14th, all green"
+node lib/memory.cjs remember "the retro is next Tuesday"
+node lib/memory.cjs recall "when did we launch"
 
 <span class="c"># 3. edit the always-in-context core blocks</span>
-node lib/mneme.cjs core-set human "Ada — founder, ships fast"
-node lib/mneme.cjs prompt          # renders the blocks for your system prompt
+node lib/memory.cjs core-set human "Ada — founder, ships fast"
+node lib/memory.cjs prompt          # renders the blocks for your system prompt
 
 <span class="c"># 4. (optional) smart recall — point at any LLM adapter</span>
-MNEME_RERANKER=./examples/reranker-echo.cjs node lib/mneme.cjs recall "when did we launch"</pre>
+MEMORY_RERANKER=./examples/reranker-echo.cjs node lib/memory.cjs recall "when did we launch"</pre>
 </div></div></section>
 
 <footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:12px">
-  <span>MNEME · remember · recall · never forget</span><span>MIT · bring your own keys · $0 to run</span>
+  <span>Memory · remember · recall · never forget</span><span>MIT · bring your own keys · $0 to run</span>
 </div></footer>
 
 <script>
