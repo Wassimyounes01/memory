@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-label="Memory — product shot">
+  <defs>
+    <style>
+      .t { font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace; font-size: 17px; }
+      .title { font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; font-size: 14px; fill: #7D8590; }
+    </style>
+    <clipPath id="panel"><rect x="1" y="1" width="1198" height="418" rx="14"/></clipPath>
+  </defs>
+  <rect x="1" y="1" width="1198" height="418" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="1.5"/>
+  <g clip-path="url(#panel)">
+    <path d="M1,15 a14,14 0 0 1 14,-14 h1170 a14,14 0 0 1 14,14 v41 h-1198 z" fill="#161B22"/>
+    <line x1="1" y1="56" x2="1199" y2="56" stroke="#30363D" stroke-width="1"/>
+    <circle cx="1060" cy="30" r="300" fill="#7C6CF5" opacity="0.045"/>
+    <circle cx="30" cy="28" r="7" fill="#FF5F57"/>
+    <circle cx="54" cy="28" r="7" fill="#FEBC2E"/>
+    <circle cx="78" cy="28" r="7" fill="#28C840"/>
+    <text x="600" y="33" text-anchor="middle" class="title">memory — core blocks + archival recall</text>
+    <rect x="0" y="56" width="4" height="364" fill="#7C6CF5" opacity="0.85"/>
+    <text x="36" y="106" class="t"><tspan fill="#7D8590">$ </tspan><tspan fill="#7C6CF5" font-weight="600">node examples/demo.cjs</tspan></text>
+    <text x="36" y="136" class="t" fill="#7D8590">--- memoryPrompt() ---</text>
+    <text x="36" y="166" class="t" fill="#7C6CF5" font-weight="600">&lt;persona&gt;  I keep my memory honest and up to date.</text>
+    <text x="36" y="196" class="t" fill="#C9D1D9">&lt;human&gt;    Ada — founder, ships fast, no fluff</text>
+    <text x="36" y="226" class="t" fill="#C9D1D9">&lt;context&gt;  Working on the v2 launch this week.</text>
+    <text x="36" y="286" class="t"><tspan fill="#7D8590">$ </tspan><tspan fill="#7C6CF5" font-weight="600">archival.search("launch")</tspan></text>
+    <text x="36" y="316" class="t" fill="#C9D1D9">3 hits (keyword + recency) → newest first</text>
+    <text x="36" y="346" class="t" fill="#7D8590">MEMORY_RERANKER unset → deterministic recall, no API key</text>
+    <text x="36" y="376" class="t" fill="#3FB950">core block updated: human — atomic write, always in context</text>
+  </g>
+</svg>

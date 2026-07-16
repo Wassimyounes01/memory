@@ -82,6 +82,14 @@ MEMORY_RERANKER=./examples/reranker-echo.cjs node lib/memory.cjs recall "when di
 
 ---
 
+## See it run
+
+<p align="center">
+  <img src="assets/product.svg" alt="Memory — product shot" width="100%">
+</p>
+
+---
+
 ## Repository layout
 
 ```
@@ -95,6 +103,19 @@ memory/
 │   └── reranker-echo.cjs    ← a zero-dep example MEMORY_RERANKER (swap for a real LLM)
 └── data/                    ← core-memory.json + archival.jsonl (gitignored, auto-created)
 ```
+
+---
+
+## Concepts
+
+| Concept | Meaning |
+|---|---|
+| **Core blocks** | Self-editing, always-in-context memory (persona / human / notes) the agent itself rewrites — with atomic writes. |
+| **Archival log** | An append-only JSONL long-term store; nothing is ever overwritten or lost. |
+| **memoryPrompt()** | Renders the core blocks into the system-prompt section that rides along on every model call. |
+| **Recall** | Keyword + recency search over the archive by default — deterministic and dependency-free. |
+| **Pluggable reranker** | MEMORY_RERANKER points at any module that reranks candidates with an LLM; unset, recall degrades gracefully instead of throwing. |
+| **Twin implementations** | A Node lib and a stdlib-only Python lib share the same ./data store — either side reads the other's writes. |
 
 ---
 
